@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nieri's Bakery</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="auth.html">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fffaf5;
+      color: #333;
+    }
+
+    .custom-btn,
+    .custom-btn1 {
+      padding: 10px 24px;
+      border-radius: 8px;
+      font-weight: 500;
+      font-size: 16px;
+      max-width: 150px;
+      width: 100%;
+    }
+
+    .custom-btn {
+      background-color: #f67280;
+      color: white;
+      border: none;
+    }
+
+    .custom-btn:hover {
+      background-color: #f55465;
+    }
+
+    .custom-btn1 {
+      background-color: white;
+      color: #f67280;
+      border: 2px solid #f67280;
+    }
+
+    .custom-btn1:hover {
+      background-color: #f67280;
+      color: white;
+    }
+
+    .navbar {
+  background-color: #ffe0e6; /* Soft pink matching theme */
+  padding-top: 12px;
+  padding-bottom: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.nav-link {
+  color: #7b2c3f !important;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.nav-link::after {
+  content: "";
+  display: block;
+  width: 0;
+  height: 2px;
+  background-color: #f67280;
+  transition: width 0.3s;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.nav-link:hover {
+  color: #f67280 !important;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+    h1 {
+      font-weight: bold;
+    }
+
+    .myRound {
+      border-radius: 50%;
+      object-fit: cover;
+      width: 150px;
+      height: 150px;
+      background-image: linear-gradient(to bottom right, #f080801a, #ffb6b92d);
+      transition: box-shadow 0.3s ease;
+    }
+
+    .myRound:hover {
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    .myScroller {
+      overflow-x: auto;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+      padding: 20px 0;
+    }
+
+    .myScroller .item {
+      display: inline-block;
+      margin: 0 10px;
+    }
+
+    .section-heading {
+      text-align: center;
+      font-size: 2.25rem;
+      margin-bottom: 1.5rem;
+      color: #f67280;
+    }
+
+    @media (max-width: 575.98px) {
+      h1 {
+        font-size: 1.75rem;
+        text-align: center;
+      }
+
+      .custom-btn,
+      .custom-btn1 {
+        font-size: 14px;
+        padding: 8px 20px;
+      }
+    }
+    .custom-btn2{
+      font-size: 14px;
+    }
+  .custom-btn2 {
+      background-color: #f67280;
+      color: white;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 8px;
+      font-weight: 500;
+      font-size: 16px;
+      max-width: 180px;
+      width: 100%;
+    }
+
+    .custom-btn2:hover {
+      background-color: #f55465;
+    }
+
+   
+  </style>
+</head>
+<body>
+  <!-- Toast Welcome Message -->
+<div id="welcomeToast" style="
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #f67280;
+  color: white;
+  padding: 15px 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(246, 114, 128, 0.5);
+  font-weight: 600;
+  font-family: 'Segoe UI', sans-serif;
+  opacity: 0;
+  transform: translateX(100%);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  z-index: 1050;
+  max-width: 320px;
+  ">
+  🎉 Welcome to Nieri's Bakery! Your sweet journey starts here 🍰
+</div>
+<!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-light">
+  <div class="container">
+    <a class="navbar-brand" href="#">Nieri's Bakery</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarContent">
+      <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Services</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+      </ul>
+
+      <!-- Auth Area -->
+      <div id="authArea" class="d-flex">
+        <a href="auth.html" class="btn btn-dark me-2" id="loginBtn">Login</a>
+        <a href="auth.html" class="btn btn-outline-dark" id="signupBtn">Sign Up</a>
+        <span class="navbar-text me-2 text-success d-none" id="welcomeUser"></span>
+        <button class="btn btn-danger d-none" id="logoutBtn">Logout</button>
+      </div>
+    </div>
+  </div>
+</nav>
+  <!-- Hero Section -->
+  <div class="container py-5">
+    <div class="row align-items-center">
+      <div class="col-md-6 text-center text-md-start">
+        <h1>Freshly Baked Happiness<br>in Every Bite</h1>
+        <p class="mt-3">At Nieri’s Bakery, we blend love and flavor into every creation. From classic pastries to modern treats, enjoy sweets that warm your heart.</p>
+        <div class="d-flex flex-column flex-sm-row gap-3 mt-4">
+          <button class="custom-btn">View Recipes</button>
+          <button class="custom-btn1">Order Now</button>
+        </div>
+      </div>
+        <div class="col-md-6 text-center mt-4 mt-md-0">
+        <img src="https://i.pinimg.com/736x/9b/83/44/9b83442a2812977e8344d13c5544bdd0.jpg" height="1100" width="500" alt="Delicious Cake" class="img-fluid">
+      </div>
+    </div>
+  </div>
+
+  <!-- Categories Section -->
+  <h2 class="text-center mb-5 mt-5">Thoughtful Valentine’s Day Gifts for Every Sweetheart!</h2>
+  <div class="container myScroller px-3  mb-5 ">
+    <div class="d-flex flex-nowrap justify-content-start">
+      <div class="item"><img src="images/img2-removebg-preview (3).png" class="myRound" alt="Gift 1"></div>
+      <div class="item"><img src="images/img3-removebg-preview.png" class="myRound" alt="Gift 2"></div>
+      <div class="item"><img src="images/img5-removebg-preview.png" class="myRound" alt="Gift 3"></div>
+      <div class="item"><img src="images/img7-removebg-preview.png" class="myRound" alt="Gift 4"></div>
+      <div class="item"><img src="images/imgremove2.png" class="myRound" alt="Gift 5"></div>
+      <div class="item"><img src="images/img3-removebg-preview.png" class="myRound" alt="Gift 6"></div>
+      <div class="item"><img src="images/img1-removebg-preview.png" class="myRound" alt="Gift 7"></div>
+    </div>
+  </div>
+
+  <!-- Cards Section -->
+  <div class="container-fluid py-5 mt-5" style="background-color: #ffdde1bc;">
+    <div class="container">
+      <h1 class="section-heading">Our Top Recipes & Creations</h1>
+      <div class="row justify-content-center gap-4 mb-5">
+     
+
+ 
+      <div class="card" style="width: 18rem; border: none; border-radius: 20px; overflow: hidden; background-color: #ffeef0;">
+  <div class="position-relative">
+    <a href="cake-detail.html?id=1" style="text-decoration: none;">
+      <img src="images/img-pastrie(1).jpg" class="card-img-top" alt="Fruity Pancake" style="height: 200px; object-fit: cover;">
+    </a>
+    <i class="bi bi-heart position-absolute top-0 end-0 m-2 bg-white p-1 rounded-circle fs-5 heart-icon"></i>
+  </div>
+  <div class="card-body px-3 py-3">
+    <a href="cake-detail.html?id=1" style="text-decoration: none; color: inherit;">
+      <h6 class="card-title fw-bold mb-3">Fruity Pancake with Orange & Blueberry</h6>
+    </a>
+    <div class="d-flex justify-content-between text-muted small">
+      <span><i class="bi bi-clock me-1"></i>30 Minutes</span>
+      <span><i class="bi bi-star me-1"></i>Sweet</span>
+    </div>
+  </div>
+</div>
+         <div class="card" style="width: 18rem; border: none; border-radius: 20px; overflow: hidden; background-color: #ffeef0;">
+  <div class="position-relative">
+    <a href="cake-detail.html?id=1" style="text-decoration: none;">
+      <img src="images/img-pastrie(2).jpg" class="card-img-top" alt="Fruity Pancake" style="height: 200px; object-fit: cover;">
+    </a>
+    <i class="bi bi-heart position-absolute top-0 end-0 m-2 bg-white p-1 rounded-circle fs-5 heart-icon"></i>
+  </div>
+  <div class="card-body px-3 py-3">
+    <a href="cake-detail.html?id=1" style="text-decoration: none; color: inherit;">
+      <h6 class="card-title fw-bold mb-3">Fruity Pancake with Orange & Blueberry</h6>
+    </a>
+    <div class="d-flex justify-content-between text-muted small">
+      <span><i class="bi bi-clock me-1"></i>30 Minutes</span>
+      <span><i class="bi bi-star me-1"></i>Sweet</span>
+    </div>
+  </div>
+</div>
+<div class="card" style="width: 18rem; border: none; border-radius: 20px; overflow: hidden; background-color: #ffeef0;">
+  <div class="position-relative">
+    <a href="cake-detail.html?id=1" style="text-decoration: none;">
+      <img src="images/img-pastrie(3).jpg" class="card-img-top" alt="Fruity Pancake" style="height: 200px; object-fit: cover;">
+    </a>
+    <i class="bi bi-heart position-absolute top-0 end-0 m-2 bg-white p-1 rounded-circle fs-5 heart-icon"></i>
+  </div>
+  <div class="card-body px-3 py-3">
+    <a href="cake-detail.html?id=1" style="text-decoration: none; color: inherit;">
+      <h6 class="card-title fw-bold mb-3">Fruity Pancake with Orange & Blueberry</h6>
+    </a>
+    <div class="d-flex justify-content-between text-muted small">
+      <span><i class="bi bi-clock me-1"></i>30 Minutes</span>
+      <span><i class="bi bi-star me-1"></i>Sweet</span>
+    </div>
+  </div>
+</div>
+<div class="card" style="width: 18rem; border: none; border-radius: 20px; overflow: hidden; background-color: #ffeef0;">
+  <div class="position-relative">
+    <a href="cake-detail.html?id=1" style="text-decoration: none;">
+      <img src="images/img-pastrie(4).jpg" class="card-img-top" alt="Fruity Pancake" style="height: 200px; object-fit: cover;">
+    </a>
+    <i class="bi bi-heart position-absolute top-0 end-0 m-2 bg-white p-1 rounded-circle fs-5 heart-icon"></i>
+  </div>
+  <div class="card-body px-3 py-3">
+    <a href="cake-detail.html?id=1" style="text-decoration: none; color: inherit;">
+      <h6 class="card-title fw-bold mb-3">Fruity Pancake with Orange & Blueberry</h6>
+    </a>
+    <div class="d-flex justify-content-between text-muted small">
+      <span><i class="bi bi-clock me-1"></i>30 Minutes</span>
+      <span><i class="bi bi-star me-1"></i>Sweet</span>
+    </div>
+  </div>
+</div>
+<div class="card" style="width: 18rem; border: none; border-radius: 20px; overflow: hidden; background-color: #ffeef0;">
+  <div class="position-relative">
+    <a href="cake-detail.html?id=1" style="text-decoration: none;">
+      <img src="images/img-pastrie(5).jpg" class="card-img-top" alt="Fruity Pancake" style="height: 200px; object-fit: cover;">
+    </a>
+    <i class="bi bi-heart position-absolute top-0 end-0 m-2 bg-white p-1 rounded-circle fs-5 heart-icon"></i>
+  </div>
+  <div class="card-body px-3 py-3">
+    <a href="cake-detail.html?id=1" style="text-decoration: none; color: inherit;">
+      <h6 class="card-title fw-bold mb-3">Fruity Pancake with Orange & Blueberry</h6>
+    </a>
+    <div class="d-flex justify-content-between text-muted small">
+      <span><i class="bi bi-clock me-1"></i>30 Minutes</span>
+      <span><i class="bi bi-star me-1"></i>Sweet</span>
+    </div>
+  </div>
+</div>
+<div class="card" style="width: 18rem; border: none; border-radius: 20px; overflow: hidden; background-color: #ffeef0;">
+  <div class="position-relative">
+    <a href="cake-detail.html?id=1" style="text-decoration: none;">
+      <img src="images/img-pastrie(6).jpg" class="card-img-top" alt="Fruity Pancake" style="height: 200px; object-fit: cover;">
+    </a>
+    <i class="bi bi-heart position-absolute top-0 end-0 m-2 bg-white p-1 rounded-circle fs-5 heart-icon"></i>
+  </div>
+  <div class="card-body px-3 py-3">
+    <a href="cake-detail.html?id=1" style="text-decoration: none; color: inherit;">
+      <h6 class="card-title fw-bold mb-3">Fruity Pancake with Orange & Blueberry</h6>
+    </a>
+    <div class="d-flex justify-content-between text-muted small">
+      <span><i class="bi bi-clock me-1"></i>30 Minutes</span>
+      <span><i class="bi bi-star me-1"></i>Sweet</span>
+    </div>
+  </div>
+</div>
+ 
+    <!-- Contact Section -->
+<div class="container py-5">
+  <h2 class="section-heading">Get in Touch</h2>
+  <form id="contactForm" class="p-4 rounded shadow-sm" style="background-color: #fff0f3; max-width: 700px; margin: auto;">
+    <div class="mb-3">
+      <label for="name" class="form-label">Name *</label>
+      <input type="text" class="form-control" id="name" required placeholder="Your Name">
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email *</label>
+      <input type="email" class="form-control" id="email" required placeholder="your@email.com">
+    </div>
+    <div class="mb-3">
+      <label for="message" class="form-label">Message *</label>
+      <textarea class="form-control" id="message" rows="4" required placeholder="Your message..."></textarea>
+    </div>
+    <button type="submit" class="custom-btn2">Send Message</button>
+    <p id="formStatus" class="mt-3 text-success fw-bold"></p>
+  </form>
+</div>
+
+<!-- Footer -->
+<footer class="footer mt-auto py-5" style="background-color: #f67280; color: white;">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
+    <div>
+      <h5 class="mb-2">Nieri's Bakery</h5>
+      <p class="mb-0" style="font-size: 0.9rem;">
+        123 Sweet Street, Flavor Town, Bakeryland<br>
+        Email: info@nierisbakery.com | Phone: +123 456 7890
+      </p>
+    </div>
+    <div class="mt-3 mt-md-0">
+      <a href="#" class="text-white me-3" style="font-size: 1.25rem;"><i class="bi bi-facebook"></i></a>
+      <a href="#" class="text-white me-3" style="font-size: 1.25rem;"><i class="bi bi-instagram"></i></a>
+      <a href="#" class="text-white" style="font-size: 1.25rem;"><i class="bi bi-twitter"></i></a>
+    </div>
+  </div>
+  <div class="text-center mt-3" style="font-size: 0.85rem; opacity: 0.8;">
+    &copy; 2025 Nieri's Bakery. All rights reserved.
+  </div>
+</footer>
+
+<!-- Firebase SDK (MUST come before your own script) -->
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+
+<!-- Your Firebase Config and Auth Protection Code -->
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyDeYHaeROm_RyeTWTybHgDiLeXSSMHjjfA",
+    authDomain: "loginsignup-d75f7.firebaseapp.com",
+    projectId: "loginsignup-d75f7",
+    appId: "1:570064158531:web:a69489f25286f95d3839f6"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+
+  auth.onAuthStateChanged(user => {
+    if (!user) {
+      window.location.href = "login.html"; // Redirect if not logged in
+    }
+  });
+
+</script>
+<script>
+  firebase.auth().onAuthStateChanged(user => {
+    const loginBtn = document.getElementById("loginBtn");
+    const signupBtn = document.getElementById("signupBtn");
+    const logoutBtn = document.getElementById("logoutBtn");
+    const welcomeUser = document.getElementById("welcomeUser");
+
+    if (user) {
+      // Show Logout + Welcome
+      loginBtn.classList.add("d-none");
+      signupBtn.classList.add("d-none");
+      logoutBtn.classList.remove("d-none");
+      welcomeUser.classList.remove("d-none");
+      welcomeUser.textContent = `Welcome, ${user.displayName || "User"} 👋`;
+
+      logoutBtn.addEventListener("click", () => {
+        firebase.auth().signOut().then(() => {
+          window.location.reload();
+        });
+      });
+
+    } else {
+      // Show Login / Signup
+      loginBtn.classList.remove("d-none");
+      signupBtn.classList.remove("d-none");
+      logoutBtn.classList.add("d-none");
+      welcomeUser.classList.add("d-none");
+    }
+  });
+</script>
+<script>
+  document.querySelectorAll('.heart-icon').forEach(icon => {
+    icon.addEventListener('click', function () {
+      this.classList.toggle('bi-heart');
+      this.classList.toggle('bi-heart-fill');
+      this.classList.toggle('text-danger'); // toggles red color when filled
+    });
+  });
+</script>
+  </body>
+</html>
